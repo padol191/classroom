@@ -1,6 +1,6 @@
 
 {
-    "mongoURI": "mongodb+srv://padol:Chaitanya@2001@cluster0.ii4oh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "mongoURI": "mongodb+srv://seekers:hackathon@123@cluster0.ctl3j.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     "jwtSecret": "secrettoken"
     
 }
