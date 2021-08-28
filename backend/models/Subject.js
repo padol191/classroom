@@ -14,7 +14,7 @@ const SubjectSchema = new Schema({
   },
   students: [
     {
-      user: {
+      studentId: {
         type: Schema.Types.ObjectId,
         ref: "users",
       },
