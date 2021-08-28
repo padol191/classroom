@@ -1,0 +1,22 @@
+@media(max-width: 650px){
+    .loginForm{
+        margin-top: 15vh !important;
+    }
+}
+
+.googleRegistration{
+    margin: auto;
+}
+
+.googleRegistration button{
+    /* width: inherit; */
+    margin-bottom: 10px;
+    border: none;
+    padding: 8px;
+}
+
+.userType{
+    display: flex;
+    margin: auto;
+    font-size: 16px;
+}
