@@ -3,11 +3,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Logo from '../resources/logo.png';
 import Danger from '../messages/danger';
 import Info from '../messages/info';
-import Success from '../messages/success';
+// import Success from '../messages/success';
 
 const Register = () => {
 
@@ -23,9 +23,9 @@ const Register = () => {
 
     const history = useHistory();
 
-    useEffect(() => {
-        localStorage.clear();
-    }, []);
+    // useEffect(() => {
+    //     localStorage.clear();
+    // }, []);
 
     const handleRegister = () => {
         
@@ -47,9 +47,9 @@ const Register = () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                if(data.errors[0].msg === 'User already exists'){
-                    setUserExists(true);
-                }
+                // if(data.errors[0].msg === 'User already exists'){
+                //     setUserExists(true);
+                // }
 
                 if('token' in data){
                     console.log('Registered');
@@ -62,21 +62,22 @@ const Register = () => {
                     })
                     .then(userDetails => userDetails.json())
                     .then(user => {
-                        // console.log(user.email);
-                        // props.handleLoginCallback(user);
-                        // history.push("/"+user.usertype+"/dashboard"); 
+                        console.log("second fetch")
                         localStorage.setItem("id", user._id);
                         if('subject' in user)
                         {
-                            localStorage.setItem("user", "student")
+                            localStorage.setItem("user", "student") 
                             history.push("/student/dashboard");
                         }
                         else
                         {
-                            localStorage.setItem("user", "teacher")
+                            localStorage.setItem("user", "teacher") 
                             history.push("/teacher/dashboard");
                         }
                     })
+                }
+                else{
+                    console.log("No token")
                 }
             })
             .catch((error) => {

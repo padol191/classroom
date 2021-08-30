@@ -2,8 +2,8 @@ import './Login.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
+import { useState } from 'react';
 import Logo from '../resources/logo.png';
 
 const Login = () => {
@@ -12,9 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const history = useHistory();
 
-    useEffect(() => {
-        localStorage.clear();
-    }, []);
+    
 
     const handleLogin = () => {
         const loginInfo = {
@@ -52,7 +50,7 @@ const Login = () => {
                     }
                     else
                     {
-                        localStorage.setItem("user", "teacher")
+                        localStorage.setItem("user", "teacher");
                         history.push("/teacher/dashboard");
                     }
                 })
@@ -63,7 +61,7 @@ const Login = () => {
         });
     }
 
-    return (  
+    return (
         <Form className="loginForm">
             <img className="logo" src={Logo} alt="Logo" />
             <h3 className="formHeading">Login</h3>

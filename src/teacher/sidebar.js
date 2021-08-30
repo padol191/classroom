@@ -1,6 +1,6 @@
 import './css/sidebar.css';
 import Logo from '../resources/logo.png'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const Sidebar = () => {
 
@@ -17,37 +17,34 @@ const Sidebar = () => {
             <div className="sidebarHeading">
 
                 <div className="logo"><img src={Logo} alt="logo" /></div>
-                <div className="appName">Kisan Kalyan</div>
+                <div className="appName">Class</div>
 
             </div>
 
             <hr />
 
             <div className="sidebarItems">
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fas fa-chart-pie"></i></div>
-                    <div className="itemName">Dashboard</div>
-                </div>
 
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fas fa-seedling"></i></div>
-                    <div className="itemName">Recommendation</div>
-                </div>
+                <Link to="/teacher/dashboard">
+                    <div className="sidebarItem">
+                        <div className="itemIcon"><i className="fas fa-chart-pie"></i></div>
+                        <div className="itemName">Dashboard</div>
+                    </div>
+                </Link>
 
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fas fa-rupee-sign" aria-hidden="true"></i></div>
-                    <div className="itemName">Sell your produce</div>
-                </div>
+                <Link to="/teacher/create">
+                    <div className="sidebarItem">
+                        <div className="itemIcon"><i className="fas fa-seedling"></i></div>
+                        <div className="itemName">Create assignment</div>
+                    </div>
+                </Link>
 
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                    <div className="itemName">Buy equipments</div>
-                </div>
-
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                    <div className="itemName">Buy products</div>
-                </div>
+                <Link to="/teacher/add">
+                    <div className="sidebarItem">
+                        <div className="itemIcon"><i className="fas fa-seedling"></i></div>
+                        <div className="itemName">Add student</div>
+                    </div>
+                </Link>
 
                 <div className="sidebarItem">
                     <div className="itemIcon"><i className="fas fa-user-alt"></i></div>
