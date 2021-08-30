@@ -43,7 +43,7 @@ router.post(
   }
 );
 
-router.post("/", async (req, res) => {
+router.post("/get", async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.body.id).select("-password");
     if (teacher) {
