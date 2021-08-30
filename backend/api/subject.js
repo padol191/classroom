@@ -6,8 +6,8 @@ const User = require("../models/User");
 const Subject = require("../models/Subject");
 const { check, validationResult } = require("express-validator");
 
-router.post("/", [
-  auth,
+router.post(
+  "/",
   [check("name", "Subject is required").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
@@ -15,31 +15,48 @@ router.post("/", [
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      console.log(req.user);
-      let subjectexist = Subject.findOne(req.body.name);
+      console.log(req.body.id);
+      let subjectexist = await Subject.findOne({ name: req.body.name });
+      console.log(subjectexist);
       if (subjectexist) {
         return res
           .status(400)
           .json({ errors: [{ msg: " subject already exists" }] });
       }
-      const teacher = await Teacher.findById(req.user.id).select("-password");
-      console.log(teacher);
+      const teacher = await Teacher.findById(req.body.id).select("-password");
+      // console.log(teacher);
       const subject = new Subject({
         teacher: teacher.name,
         name: req.body.name,
       });
       console.log(subject);
+      teacher.subjectCreated.push({ name: req.body.name });
       const sub = await subject.save();
+      const tech = await teacher.save();
       res.json(sub);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       //   console.log(subject);
 
       res.status(500).send("server error");
     }
-  },
-]);
+  }
+);
 
+router.get("/", async (req, res) => {
+  try {
+    const teacher = await Teacher.findById(req.body.id).select("-password");
+    if (teacher) {
+      res.json(teacher.subjectCreated);
+    } else {
+      res.status(400).send("doesn't exist");
+    }
+  } catch (err) {
+    // console.error(err.message);
+    console.error("gg");
+    res.status(500).send("Server Error");
+  }
+});
 //
 router.put("/add/:subjectname", [
   auth,
@@ -52,6 +69,7 @@ router.put("/add/:subjectname", [
     try {
       const { email } = req.body;
       let user = await User.findOne({ email });
+      // const teacher = await Teacher.findById(req.user.id).select("-password");
       let subjectadd = await Subject.findOne({ name: req.params.subjectname });
       if (user) {
         if (
@@ -61,6 +79,7 @@ router.put("/add/:subjectname", [
         ) {
           return res.status(400).json({ msg: "already added" });
         }
+
         user.subject.push({ name: req.params.subjectname });
         await user.save();
         subjectadd.students.push({ studentId: user.id });
@@ -77,4 +96,5 @@ router.put("/add/:subjectname", [
     }
   },
 ]);
+
 module.exports = router;

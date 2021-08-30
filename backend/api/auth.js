@@ -10,9 +10,12 @@ const Teacher = require("../models/Teacher");
 
 router.get("/", auth, async (req, res) => {
   try {
-    console.log(req.user);
-    const user = await User.findById(req.user.id).select("-password");
-    const teacher = await Teacher.findById(req.user.id).select("-password");
+    console.log(req.teacher);
+    if (req.user) {
+      var user = await User.findById(req.user.id).select("-password");
+    } else {
+      var teacher = await Teacher.findById(req.teacher.id).select("-password");
+    }
     if (teacher && user) {
       res.json(teacher);
     }
@@ -21,11 +24,9 @@ router.get("/", auth, async (req, res) => {
     }
     if (user && !teacher) {
       res.json(user);
-    } else {
-      throw "Error";
     }
   } catch (err) {
-    // console.error(err.message);
+    console.error(err.message);
     console.error("gg");
     res.status(500).send("Server Error");
   }
