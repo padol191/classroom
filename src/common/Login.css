@@ -1,0 +1,102 @@
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 30vw !important;
+    margin-top: 15vh;
+    box-shadow:  20px 20px 60px #d9d9d9,  -20px -20px 60px #ffffff;
+    padding: 35px;
+    border-radius: 10px;
+}
+
+.loginForm h3{
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 35px;
+}
+
+.input-field{
+    background-color: #f3f6f9 !important;
+    border: none !important;
+    padding: 3%;
+    margin-bottom: 10px !important;
+    width: 80%;
+}
+
+.form-control{
+    /* width: 70% !important; */
+    margin: auto;
+}
+
+.input-field:focus{
+    border-color: transparent !important;
+    box-shadow: unset !important;
+}
+
+.userType{
+    text-align: center;
+}
+
+.createAccount{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.createAccount button{
+    background-color: #0d6efd;
+    border: none !important;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    /* width: 30%; */
+}
+
+.createAccount span{
+    float: right;
+    font-size: 12px;
+}
+
+.createAccount span a{
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+.formHeading{
+    text-align: center;
+}
+
+.logo{
+    height: 35%;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media(max-width:650px){
+    .loginForm{
+        width: 50vw !important;
+        margin-top: 25vh;
+    }
+
+    .createAccount{
+        flex-direction: column;
+    }
+
+    /* .createAccount button{
+        flex-direction: column;
+        width: unset;
+    } */
+
+    .createAccount span{
+        float: none;
+        text-align: center;
+    }
+}
+
+@media(min-width:750px){
+    br{
+        display: none;
+    }
+}
