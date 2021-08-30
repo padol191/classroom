@@ -2,7 +2,7 @@ import './Login.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from '../resources/logo.png';
 
@@ -11,8 +11,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const history = useHistory();
-
-    
 
     const handleLogin = () => {
         const loginInfo = {
@@ -31,17 +29,17 @@ const Login = () => {
         .then(data => {
         // console.log(data);
             if(data.hasOwnProperty("token")) {
+                const token = console.log(data.token)
                 fetch('http://localhost:5000/api/auth', {
                     method: "GET",
                     headers: {
-                    "X-Auth-Token": data.token
+                    // Authorization: "Basic SGVsbG8gdGhlcmUgOikgSGF2ZSBhIGdvb2QgZGF5IQ==",
+                    "X-Auth-Token": JSON.stringify(token)
                     }
                 })
                 .then(userDetails => userDetails.json())
                 .then(user => {
-                    // console.log(user.email);
-                    // props.handleLoginCallback(user);
-                    // history.push("/"+user.usertype+"/dashboard"); 
+                    console.log(user.msg);
                     localStorage.setItem("id", user._id);
                     if('subject' in user)
                     {
@@ -54,6 +52,17 @@ const Login = () => {
                         history.push("/teacher/dashboard");
                     }
                 })
+                .catch((err) => {
+                    console.error('Error:', err);
+                    });
+                // axios.get("http://localhost:5000/api/auth", {
+                //     headers: {
+                //     "x-auth-token": data.token,
+                //     },
+                // })
+                // .then(res => {
+                //     console.log(res.data);
+                // });
             }
         })
         .catch((error) => {

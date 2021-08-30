@@ -1,0 +1,15 @@
+.addSubject{
+    width: 20%;
+    height: 30vh;
+    background-color: grey;
+}
+
+.addIcon{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.addIcon i{
+    color: white;
+}
