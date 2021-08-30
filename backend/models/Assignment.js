@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const AssignmentSchema = new Schema({
+  num: {
+    type: Number,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -11,6 +15,15 @@ const AssignmentSchema = new Schema({
   },
   deadline: {
     type: Date,
+  },
+  subject: {
+    subjectId: {
+      type: Schema.Types.ObjectId,
+      ref: "subject",
+    },
+    subjectName: {
+      type: String,
+    },
   },
   uploaded: [
     {

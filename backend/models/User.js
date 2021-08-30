@@ -40,12 +40,13 @@ const UserSchema = new Schema({
         ref: "assignment",
       },
       completed: {
-        type: Schema.Types.Boolean,
-        ref: "assignment",
+        type: Boolean,
       },
       fileUrl: {
-        type: Schema.Types.String,
-        ref: "assignment",
+        type: String,
+      },
+      subject: {
+        type: String,
       },
     },
   ],

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
+// const auth = require("../middleware/auth");
 const Teacher = require("../models/Teacher");
 const User = require("../models/User");
 const Subject = require("../models/Subject");
@@ -43,7 +43,7 @@ router.post(
   }
 );
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.body.id).select("-password");
     if (teacher) {
