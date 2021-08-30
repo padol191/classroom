@@ -29,7 +29,7 @@ const Login = () => {
         .then(data => {
         // console.log(data);
             if(data.hasOwnProperty("token")) {
-                const token = console.log(data.token)
+                const token = data.token
                 fetch('http://localhost:5000/api/auth', {
                     method: "GET",
                     headers: {
@@ -46,7 +46,7 @@ const Login = () => {
                         localStorage.setItem("user", "student")
                         history.push("/student/dashboard");
                     }
-                    else
+                    if('subjectCreated' in user)
                     {
                         localStorage.setItem("user", "teacher");
                         history.push("/teacher/dashboard");

@@ -11,17 +11,23 @@ const AddStudent = () => {
     const [subject, setSubject] = useState('');
 
     useEffect(() => {
+
+        const teacherID = { "id": localStorage.getItem("id") };
+
         fetch('http://localhost:5000/api/subject/get', {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
             },
-            body: { "id": localStorage.getItem("id") }
+            body: JSON.stringify(teacherID)
         })
         .then(data => data.json())
         .then(subjects => {
             console.log(subjects);
         })
+        .catch((err) => {
+            console.error('Error:', err);
+        });
     }, [])
 
     const handleAdd = () => {
