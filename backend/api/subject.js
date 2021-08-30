@@ -58,8 +58,8 @@ router.get("/", async (req, res) => {
   }
 });
 //
-router.put("/add/:subjectname", [
-  auth,
+router.put(
+  "/add/:subjectname",
   [check("email", "email is required").not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
@@ -94,7 +94,7 @@ router.put("/add/:subjectname", [
       console.log(err);
       res.status(500).send("server error");
     }
-  },
-]);
+  }
+);
 
 module.exports = router;
