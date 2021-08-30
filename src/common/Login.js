@@ -29,12 +29,12 @@ const Login = () => {
         .then(data => {
         // console.log(data);
             if(data.hasOwnProperty("token")) {
-                const token = data.token
+                // console.log(data.token)
                 fetch('http://localhost:5000/api/auth', {
                     method: "GET",
                     headers: {
                     // Authorization: "Basic SGVsbG8gdGhlcmUgOikgSGF2ZSBhIGdvb2QgZGF5IQ==",
-                    "X-Auth-Token": JSON.stringify(token)
+                    "X-Auth-Token": data.token
                     }
                 })
                 .then(userDetails => userDetails.json())
