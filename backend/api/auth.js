@@ -10,14 +10,16 @@ const Teacher = require("../models/Teacher");
 
 router.get("/", auth, async (req, res) => {
   try {
-    console.log(req.teacher);
+    // console.log(req.teacher.id);
     if (req.user) {
       var user = await User.findById(req.user.id).select("-password");
-    } else {
+    } else if (req.teacher) {
       var teacher = await Teacher.findById(req.teacher.id).select("-password");
     }
     if (teacher && user) {
-      res.json(teacher);
+      console.log(teacher);
+      console.log(user);
+      res.json(user);
     }
     if (teacher && !user) {
       res.json(teacher);
@@ -26,7 +28,7 @@ router.get("/", auth, async (req, res) => {
       res.json(user);
     }
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     console.error("gg");
     res.status(500).send("Server Error");
   }
@@ -56,7 +58,7 @@ router.post(
           res.status(400).json({ errors: [{ msg: "invalid credentials" }] });
         }
         const payload = {
-          user: {
+          teacher: {
             id: teacher.id,
           },
         };
@@ -96,7 +98,7 @@ router.post(
       }
       // res.json({ msg: "user registered" });
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
       res.status(500).message("error");
     }
   }

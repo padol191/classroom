@@ -24,7 +24,7 @@ router.post(
           .json({ errors: [{ msg: " subject already exists" }] });
       }
       const teacher = await Teacher.findById(req.body.id).select("-password");
-      // console.log(teacher);
+      console.log(teacher);
       const subject = new Subject({
         teacher: teacher.name,
         name: req.body.name,
@@ -33,9 +33,9 @@ router.post(
       teacher.subjectCreated.push({ name: req.body.name });
       const sub = await subject.save();
       const tech = await teacher.save();
-      res.json(sub);
+      res.json({ msg: "done" });
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       //   console.log(subject);
 
       res.status(500).send("server error");
