@@ -34,14 +34,14 @@ const Sidebar = () => {
 
                 <Link to="/teacher/create">
                     <div className="sidebarItem">
-                        <div className="itemIcon"><i className="fas fa-seedling"></i></div>
+                        <div className="itemIcon"><i className="fa fa-book" aria-hidden="true"></i></div>
                         <div className="itemName">Create assignment</div>
                     </div>
                 </Link>
 
                 <Link to="/teacher/add">
                     <div className="sidebarItem">
-                        <div className="itemIcon"><i className="fas fa-seedling"></i></div>
+                        <div className="itemIcon"><i className='fas'>&#xf5da;</i></div>
                         <div className="itemName">Add student</div>
                     </div>
                 </Link>
