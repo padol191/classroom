@@ -1,4 +1,4 @@
-#classroom web app
+# classroom web app
 ### Steps to run the app
 #### `npm i` in root directory
 #### `cd backend`
