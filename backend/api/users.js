@@ -111,5 +111,29 @@ router.post(
     }
   }
 );
+router.post(
+  "/getsubject",
+  check("id", "id is required").notEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { id } = req.body;
+
+    try {
+      const user = await User.findById(id).select("subject");
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(400).json({ msg: "not found" });
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  }
+);
 
 module.exports = router;
