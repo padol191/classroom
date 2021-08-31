@@ -3,7 +3,7 @@
 #### `npm i` in root directory
 #### `cd backdend`
 #### `npm i` 
-##To run react app
+## To run react app
 ####`npm start` in root directory
 #### `cd backdend`
 ####`npm start`
