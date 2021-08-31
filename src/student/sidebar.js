@@ -1,8 +1,11 @@
 import './css/sidebar.css';
 import Logo from '../resources/logo.png'
 import { useHistory, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const Sidebar = () => {
+
+    const [subjectList, setSubjectList] = useState([]);
 
     const history = useHistory();
 
@@ -10,6 +13,29 @@ const Sidebar = () => {
         localStorage.clear()
         history.push("/");
     }
+
+    useEffect(() => {
+        async function fetchSubjects() {
+
+          const teacherID = { "id": localStorage.getItem("id") };
+
+          const response = await fetch(
+            `http://localhost:5000/api/users/getname`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+            },
+            body: JSON.stringify(teacherID)
+            }
+          );
+          const fetchedSubjects = await response.json(response);
+        //   console.log(fetchedSubjects)
+          setSubjectList(fetchedSubjects);
+          console.log(subjectList)
+        }
+        fetchSubjects();
+    },[])
 
     return (
         <>
@@ -22,7 +48,7 @@ const Sidebar = () => {
 
             </div>
 
-            {/* <hr /> */}
+            <hr />
 
             <div className="sidebarItems">
 
@@ -53,7 +79,7 @@ const Sidebar = () => {
             </div>
         </div>
         <div className="logged">
-            <div className="appName">Logged In: John Doe</div>
+            <div>Logged In: { subjectList.name }</div>
         </div>
     </>
     );
