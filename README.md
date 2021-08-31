@@ -1,12 +1,12 @@
 # classroom web app
-### Steps to run the app
+## Install dependencies 
 #### `npm i` in root directory
 #### `cd backend`
 #### `npm i` 
 ## To run react app
 #### `npm start` in root directory
-#### `cd backend`
-#### `npm start`
+#### `cd backend` (in different terminal)
+#### `npm run server` 
 ### Technology used
 #### React
 #### Node
