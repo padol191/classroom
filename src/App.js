@@ -8,6 +8,7 @@ import StudentDashboard from './student/studentDashboard';
 import TeacherDashboard from './teacher/teacherDashboard';
 import CreateAssignment from './teacher/createAssignment';
 import AddStudent from './teacher/addStudent';
+import Assignments from './student/assignments'
 
 function App() {
 
@@ -17,6 +18,9 @@ function App() {
       <Route exact path="/register" component={Register} />
       <Route exact path="/student/dashboard">
         { localStorage.getItem("user")==="student" ? <StudentDashboard /> : <AccessDenied /> }
+      </Route>
+      <Route exact path="/student/assignments">
+        { localStorage.getItem("user")==="student" ? <Assignments /> : <AccessDenied /> }
       </Route>
       <Route exact path="/teacher/dashboard">
         { localStorage.getItem("user")==="teacher" ? <TeacherDashboard /> : <AccessDenied /> }

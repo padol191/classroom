@@ -9,29 +9,43 @@ const AddStudent = () => {
 
     const [student, setStudent] = useState('');
     const [subject, setSubject] = useState('');
+    const [subjectList, setSubjectList] = useState([]);
 
     useEffect(() => {
+        async function fetchSubjects() {
 
-        const teacherID = { "id": localStorage.getItem("id") };
+            const teacherID = { "id": localStorage.getItem("id") };
 
-        fetch('http://localhost:5000/api/subject/get', {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
+          const response = await fetch(
+            `http://localhost:5000/api/subject/get`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
             },
             body: JSON.stringify(teacherID)
+            }
+          );
+          const fetchedSubjects = await response.json(response);
+          setSubjectList(fetchedSubjects);
+          console.log(fetchedSubjects)
+        }
+        fetchSubjects();
+      },[])
+    
+    const handleAdd = () => {
+        fetch('http://localhost:5000/api/subject/add/'+subject,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "email": student })
         })
         .then(data => data.json())
-        .then(subjects => {
-            console.log(subjects);
-        })
-        .catch((err) => {
-            console.error('Error:', err);
-        });
-    }, [])
+        .then(response => console.log())
 
-    const handleAdd = () => {
-
+        setStudent('');
+        setSubject('');
     }
 
     return (  
@@ -59,9 +73,7 @@ const AddStudent = () => {
                         e.preventDefault();
                         setSubject(e.target.value);
                     }} >
-                        <option value="A">Apple</option>
-                        <option value="B">Banana</option>
-                        <option value="C">Cranberry</option>
+                        {subjectList.map((name, index) => <option key={index} value={name.name}>{name.name}</option>)}
                     </select>
                     <div className="createAccount">
                         <Button style={{margin: "auto"}} variant="primary" onClick={handleAdd} >Add</Button>

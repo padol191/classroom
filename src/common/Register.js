@@ -15,7 +15,7 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmpass, setConfirmPass] = useState('');
-    // const [userType, setUserType] = useState('');
+    const [userType, setUserType] = useState('');
 
     const [passwordsDontMatch, setPasswordsDontMatch] = useState(false);
     const [userExists, setUserExists] = useState(false);
@@ -33,7 +33,7 @@ const Register = () => {
             "name": name,
             "email": email,
             "password": password,
-            "usertype": "Teacher"
+            "usertype": userType
         };
 
         if(password === confirmpass){
@@ -68,11 +68,13 @@ const Register = () => {
                         {
                             localStorage.setItem("user", "student") 
                             history.push("/student/dashboard");
+                            window.reload();
                         }
                         else
                         {
                             localStorage.setItem("user", "teacher") 
                             history.push("/teacher/dashboard");
+                            window.reload();
                         }
                     })
                 }
@@ -114,6 +116,13 @@ const Register = () => {
                     e.preventDefault();
                     setConfirmPass(e.target.value);
                 }} />
+                <select className="subjectDropdown" value={userType} onChange={(e) => { 
+                        e.preventDefault();
+                        setUserType(e.target.value);
+                }} >
+                    <option value="Teacher">Teacher</option>
+                    <option value="Student">Student</option>
+                </select>
                 {/* {['radio'].map((type) => (
                     <div key={`inline-${type}`} className="mb-3 userType">
                         <Form.Check

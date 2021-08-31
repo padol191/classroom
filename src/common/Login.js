@@ -1,16 +1,21 @@
 import './Login.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from '../resources/logo.png';
 
 const Login = () => {
-
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [redirectPath, setRedirectPath] = useState("/");
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const history = useHistory();
+
+    if (loggedIn) {
+        return <Redirect to={redirectPath} />
+    }
 
     const handleLogin = () => {
         const loginInfo = {
@@ -43,13 +48,15 @@ const Login = () => {
                     localStorage.setItem("id", user._id);
                     if('subject' in user)
                     {
-                        localStorage.setItem("user", "student")
+                        localStorage.setItem("user", "student");
                         history.push("/student/dashboard");
+                        window.reload();
                     }
                     if('subjectCreated' in user)
                     {
                         localStorage.setItem("user", "teacher");
                         history.push("/teacher/dashboard");
+                        window.reload();
                     }
                 })
                 .catch((err) => {

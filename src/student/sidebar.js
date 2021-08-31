@@ -1,17 +1,13 @@
-import './sidebar.css';
-import Logo from '../resources/Logo.png'
-import { useHistory } from 'react-router-dom';
-import { UserContext } from '../App';
-import { useContext } from 'react';
+import './css/sidebar.css';
+import Logo from '../resources/logo.png'
+import { useHistory, Link } from 'react-router-dom';
 
 const Sidebar = () => {
 
     const history = useHistory();
-    const user = useContext(UserContext);
-    console.log(user);
 
     const handleLogout = () => {
-        localStorage.clear();
+        localStorage.clear()
         history.push("/");
     }
 
@@ -21,45 +17,27 @@ const Sidebar = () => {
             <div className="sidebarHeading">
 
                 <div className="logo"><img src={Logo} alt="logo" /></div>
-                <div className="appName">Kisan Kalyan</div>
+                <div className="appName">Class</div>
 
             </div>
 
             <hr />
 
             <div className="sidebarItems">
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fas fa-chart-pie"></i></div>
-                    <div className="itemName">Dashboard</div>
-                </div>
 
-                { user.user.usertype === "farmer" &&
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fas fa-seedling"></i></div>
-                    <div className="itemName">Recommendation</div>
-                </div>
-                }
+                <Link to="/student/dashboard">
+                    <div className="sidebarItem">
+                        <div className="itemIcon"><i className="fas fa-chart-pie"></i></div>
+                        <div className="itemName">Dashboard</div>
+                    </div>
+                </Link>
 
-                { user.user.usertype === "farmer" &&
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fas fa-rupee-sign" aria-hidden="true"></i></div>
-                    <div className="itemName">Sell your produce</div>
-                </div>
-                }
-
-                { user.user.usertype === "farmer" &&
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                    <div className="itemName">Buy equipments</div>
-                </div>
-                }
-
-                { user.user.usertype === "buyer" &&
-                <div className="sidebarItem">
-                    <div className="itemIcon"><i className="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                    <div className="itemName">Buy products</div>
-                </div>
-                }
+                <Link to="/student/assignments">
+                    <div className="sidebarItem">
+                        <div className="itemIcon"><i className="fa fa-book" aria-hidden="true"></i></div>
+                        <div className="itemName">Assignments</div>
+                    </div>
+                </Link>
 
                 <div className="sidebarItem">
                     <div className="itemIcon"><i className="fas fa-user-alt"></i></div>
