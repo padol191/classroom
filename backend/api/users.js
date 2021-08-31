@@ -111,6 +111,7 @@ router.post(
     }
   }
 );
+
 router.post(
   "/getsubject",
   check("id", "id is required").notEmpty(),
@@ -140,26 +141,50 @@ router.post(
   "/getsubject",
   check("id", "Id is required").notEmpty(),
   async (req, res) => {
- const errors = validationResult(req);
-if (!errors.isEmpty()) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-const { id } = req.body;
+    const { id } = req.body;
 
-try{ 
- let user = await User.findById(id).select("subject");
-if(user){
- res.json(user);
-}
-else{
- res.status(400).json({msg: "user not found"})
-}
-}catch(err){
-res.status(500).json({msg: "server error"})
-}
+    try {
+      let user = await User.findById(id).select("subject");
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(400).json({ msg: "user not found" });
+      }
+    } catch (err) {
+      res.status(500).json({ msg: "server error" });
+    }
+  }
+);
 
+router.post(
+  "/getname",
+  check("id", "Id is required").notEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-});
+    const { id } = req.body;
 
+    try {
+      let user = await User.findById(id).select("name");
+      let teacher = await Teacher.findById(id).select("name");
+      if (user && !teacher) {
+        res.json(user);
+      } else if (teacher && !user) {
+        res.json(teacher);
+      } else {
+        res.status(400).json({ msg: "doesnt exist" });
+      }
+    } catch (err) {
+      res.status(500).json({ msg: "server error" });
+    }
+  }
+);
 module.exports = router;
