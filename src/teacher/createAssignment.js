@@ -3,13 +3,35 @@ import '../common/main.css';
 import './css/createAssignment.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CreateAssignment = () => {
 
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
     const [subject, setSubject] = useState('');
+    const [subjectList, setSubjectList] = useState([]);
+
+    useEffect(() => {
+        async function fetchSubjects() {
+
+            const teacherID = { "id": localStorage.getItem("id") };
+
+          const response = await fetch(
+            `http://localhost:5000/api/subject/get`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+            },
+            body: JSON.stringify(teacherID)
+            }
+          );
+          const fetchedSubjects = await response.json(response);
+          setSubjectList(fetchedSubjects);
+        }
+        fetchSubjects();
+      },[])
 
     const handleAssign = () => {
 
@@ -27,7 +49,7 @@ const CreateAssignment = () => {
                         setTitle(e.target.value);
                     }} />
                     <Form.Group style={{margin: "auto"}} className="mb-3 input-field" controlId="exampleForm.ControlTextarea1">
-                        <Form.Control as="textarea" rows={3} className="input-field input-area" placeholder="Description" value={desc} onChange={(e) => { 
+                        <Form.Control as="textarea" style={{width: "100%", padding: "0%"}} rows={3} className="input-field input-area" placeholder="Description" value={desc} onChange={(e) => { 
                             e.preventDefault();
                             setDesc(e.target.value);
                         }} />
@@ -36,9 +58,7 @@ const CreateAssignment = () => {
                         e.preventDefault();
                         setSubject(e.target.value);
                     }} >
-                        <option value="A">Apple</option>
-                        <option value="B">Banana</option>
-                        <option value="C">Cranberry</option>
+                        {subjectList.map((name, index) => <option key={index} value={name.name}>{name.name}</option>)}
                     </select>
                     <div className="createAccount">
                         <Button style={{margin: "auto"}} variant="primary" onClick={handleAssign} >Assign</Button>

@@ -13,3 +13,20 @@
 .addIcon i{
     color: white;
 }
+
+.addSubject{
+    width: 20%;
+    height: 30vh;
+    background-color: grey;
+}
+
+.subjects{
+    display: flex;
+    justify-content: space-around;
+}
+
+.subject h1{
+    text-align: center;
+    color: white;
+    margin-top: 35%;
+}

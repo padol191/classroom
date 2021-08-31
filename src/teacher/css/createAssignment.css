@@ -1,3 +1,7 @@
 .input-area{
     font-family: 'Quicksand' !important;
 }
+
+.input-area:focus{
+    border: none !important;
+}
