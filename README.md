@@ -5,6 +5,7 @@
 #### `npm i` 
 ## To run react app
 #### `npm start` in root directory
+## To run express app
 #### `cd backend` (in different terminal)
 #### `npm run server` 
 ### Technology used
