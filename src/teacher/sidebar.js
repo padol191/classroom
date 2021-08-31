@@ -12,6 +12,7 @@ const Sidebar = () => {
     }
 
     return (
+        <>
         <div className="sidebar">  
 
             <div className="sidebarHeading">
@@ -22,6 +23,7 @@ const Sidebar = () => {
             </div>
 
             <hr />
+
 
             <div className="sidebarItems">
 
@@ -46,10 +48,10 @@ const Sidebar = () => {
                     </div>
                 </Link>
 
-                <div className="sidebarItem">
+                {/* <div className="sidebarItem">
                     <div className="itemIcon"><i className="fas fa-user-alt"></i></div>
                     <div className="itemName">Profile</div>
-                </div>
+                </div> */}
                 
             </div>
 
@@ -58,6 +60,10 @@ const Sidebar = () => {
                 <div className="logoutIcon"><i className="fas fa-sign-out-alt"></i></div>
             </div>
         </div>
+        <div className="logged">
+            <div className="appName">Logged In: John Doe</div>
+        </div>
+    </>
     );
 }
  

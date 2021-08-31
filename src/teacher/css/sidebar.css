@@ -85,3 +85,13 @@
 .sidebarFooter div{
     padding: 5px;
 }
+
+.logged{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+}
+
+.appName{
+    color: white;
+}
